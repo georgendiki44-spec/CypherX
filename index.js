@@ -51,6 +51,7 @@ const sendTelegramAlert = async (message) => {
 function detectPlatform() {
   if (process.env.DYNO) return "Heroku";
   if (process.env.RENDER) return "Render";
+  if (process.env.RAILWAY_ENVIRONMENT) return "Railway";
   if (process.env.PREFIX && process.env.PREFIX.includes("termux")) return "Termux";
   if (process.env.PORTS && process.env.CYPHERX_HOST_ID) return "CypherX Platform";
   if (process.env.P_SERVER_UUID) return "Panel";
@@ -68,7 +69,7 @@ function detectPlatform() {
   }
 }
 
-const allowedPlatforms = ["Heroku", "Render", "Termux", "Panel", "Windows", "CypherX Platform", "macOS"];
+const allowedPlatforms = ["Heroku", "Render", "Railway", "Termux", "Panel", "Windows", "CypherX Platform", "Linux Container (LXC)", "macOS", "Linux"];
 const currentPlatform = detectPlatform();
 
 if (!allowedPlatforms.includes(currentPlatform)) {
