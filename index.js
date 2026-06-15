@@ -69,21 +69,9 @@ function detectPlatform() {
   }
 }
 
-const allowedPlatforms = ["Heroku", "Render", "Railway", "Termux", "Panel", "Windows", "CypherX Platform", "Linux Container (LXC)", "macOS", "Linux"];
 const currentPlatform = detectPlatform();
-
-if (!allowedPlatforms.includes(currentPlatform)) {
-  console.error(`🚫 Platform "${currentPlatform}" is not allowed! Crashing infinitely...`);
-  const crashInfinitely = () => {
-    setTimeout(() => {
-      console.log("💥 Crashing again...");
-      process.exit(1);
-    }, 1000);
-  };
-  crashInfinitely();
-  process.on('uncaughtException', crashInfinitely);
-  process.on('unhandledRejection', crashInfinitely);
-}
+logMessage(`Running on platform: ${currentPlatform}`);
+// do not block or crash based on platform
 
 const envPath = path.join(__dirname, '.env');
 
