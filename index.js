@@ -8,6 +8,12 @@ const AdmZip = require('adm-zip');
 const mega = require('megajs');
 require('dotenv').config();
 
+const SAFE_TMP = process.env.TMPDIR || '/tmp';
+
+if (!fs.existsSync(SAFE_TMP)) {
+  fs.mkdirSync(SAFE_TMP, { recursive: true });
+}
+
 const zipPath = 'bot.zip';
 const extractPath = './';
 const botFileName = 'cypher.js';
